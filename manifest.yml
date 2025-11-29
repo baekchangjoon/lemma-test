@@ -1,0 +1,29 @@
+modules:
+  trigger:
+    - key: setup-app-trigger
+      function: setup-app
+      events:
+        - avi:jira:installed:app
+    - key: validate-link-trigger
+      function: validate-link
+      events:
+        - avi:jira:created:issuelink
+  webtrigger:
+    - key: manual-setup-trigger
+      function: setup-app
+  function:
+    - key: setup-app
+      handler: index.setup
+    - key: validate-link
+      handler: index.validateLink
+permissions:
+  scopes:
+    - manage:jira-configuration
+    - write:jira-work
+    - read:jira-work
+app:
+  runtime:
+    name: nodejs22.x
+    memoryMB: 256
+    architecture: arm64
+  id: ari:cloud:ecosystem::app/e1ccea90-5e14-4057-8154-df4833826520
